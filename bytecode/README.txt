@@ -1,6 +1,6 @@
 // compilation directe en JDK 7...
 $ j7
-$ javac -version src/main/java/bytecode/*.java 
+$ javac -version src/main/java/bytecode/Display.java 
 javac 1.7.0_71
 
 
@@ -83,15 +83,60 @@ $ java -cp target/classes bytecode.Display
 bytecode.Display -> cafe babe 0000 0032  : 0x32 = 50 = Java 6
 Exécution sur Java Runtime Environment 1.6
 
-// sauf quand du code qui a parfaitement compilé pose problème...
+
+// sauf quand une dépendance contient du bytecode de version 7...
 $ java -cp target/classes:lib/* bytecode.Display2
 bytecode.Display2 -> cafe babe 0000 0032  : 0x32 = 50 = Java 6
 Exécution sur Java Runtime Environment 1.6
+Exception in thread "main" java.lang.UnsupportedClassVersionError: org/apache/lucene/util/IOUtils : Unsupported major.minor version 51.0
+        at java.lang.ClassLoader.defineClass1(Native Method)
+
+
+// la règle enforceBytecodeVersion du maven-enforcer-plugin permet de vérifier la version de bytecode des dépendances...
+$ mvn clean compile -Pproperties,enforcer
+[INFO] Scanning for projects...
+[INFO]                                                                         
+[INFO] ------------------------------------------------------------------------
+[INFO] Building Bytecode version display 0.0.1-SNAPSHOT
+[INFO] ------------------------------------------------------------------------
+[INFO] 
+[INFO] --- maven-clean-plugin:2.5:clean (default-clean) @ bytecode ---
+[INFO] Deleting /home/herve/projets/maven/misc/demos/bytecode/target
+[INFO] 
+[INFO] --- maven-enforcer-plugin:1.3.1:enforce (enforce-bytecode-version) @ bytecode ---
+[INFO] Restricted to JDK 1.6 yet org.apache.lucene:lucene-core:jar:5.0.0:compile contains org/apache/lucene/LucenePackage.class targeted to JDK 1.7
+[WARNING] Rule 0: org.apache.maven.plugins.enforcer.EnforceBytecodeVersion failed with message:
+Found Banned Dependency: org.apache.lucene:lucene-core:jar:5.0.0
+Use 'mvn dependency:tree' to locate the source of the banned dependencies.
+[INFO] ------------------------------------------------------------------------
+[INFO] BUILD FAILURE
+[INFO] ------------------------------------------------------------------------
+[INFO] Total time: 0.890 s
+[INFO] Finished at: 2015-04-04T20:16:14+02:00
+[INFO] Final Memory: 6M/245M
+[INFO] ------------------------------------------------------------------------
+[ERROR] Failed to execute goal org.apache.maven.plugins:maven-enforcer-plugin:1.3.1:enforce (enforce-bytecode-version) on project bytecode: Some Enforcer rules have failed. Look above for specific messages explaining why the rule failed. -> [Help 1]
+[ERROR] 
+[ERROR] To see the full stack trace of the errors, re-run Maven with the -e switch.
+[ERROR] Re-run Maven using the -X switch to enable full debug logging.
+[ERROR] 
+[ERROR] For more information about the errors and possible solutions, please read the following articles:
+[ERROR] [Help 1] http://cwiki.apache.org/confluence/display/MAVEN/MojoExecutionException
+
+
+// Mais si enforcer détecte bien un problème dans les dépendances, il ne détecte pas tout...
+$ j7
+$ mvn clean compile -Pproperties
+$ j6
+$ java -cp target/classes:lib/* bytecode.Display3
+bytecode.Display3 -> cafe babe 0000 0032  : 0x32 = 50 = Java 6
+Exécution sur Java Runtime Environment 1.6
 Exception in thread "main" java.lang.NoSuchMethodError: java.sql.Driver.getParentLogger()Ljava/util/logging/Logger;
-	at bytecode.Display2.callJava7API(Display2.java:54)
-	at bytecode.Display2.main(Display2.java:44)
-	at bytecode.Display2.main(Display2.java:36)
-// compilé avec un JDK 7, du bytecode version 6 peut contenir des appels à des classes introduites en Java 7...
+        at bytecode.Display3.callJava7API(Display3.java:54)
+        at bytecode.Display3.main(Display3.java:44)
+        at bytecode.Display3.main(Display3.java:36)
+// compilé avec un JDK 7, du bytecode version 6 peut contenir des appels à des APIs introduites en Java 7...
+
 
 // la compilation avec un JDK 6 aurait montré le problème...
 $ j6

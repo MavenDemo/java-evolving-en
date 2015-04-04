@@ -6,7 +6,7 @@ set -v
 
 read -p "compilation directe en JDK 7..."
 j7
-javac -version src/main/java/bytecode/*.java 
+javac -version src/main/java/bytecode/Display.java 
 
 
 read -p "exécution en JRE 7..."
@@ -42,9 +42,21 @@ read -p "donc tout se passe bien en exécution en JRE 6..."
 j6
 java -cp target/classes bytecode.Display
 
-read -p "sauf quand du code qui a parfaitement compilé pose problème..."
+read -p "sauf quand une dépendance contient du bytecode de version 7..."
 java -cp target/classes:lib/* bytecode.Display2
-read -p "compilé avec un JDK 7, du bytecode version 6 peut contenir des appels à des classes introduites en Java 7..."
+
+
+read -p "la règle enforceBytecodeVersion du maven-enforcer-plugin permet de vérifier la version de bytecode des dépendances..."
+mvn clean compile -Pproperties,enforcer
+
+
+read -p "Mais si enforcer détecte bien un problème dans les dépendances, il ne détecte pas tout..."
+j7
+mvn clean compile -Pproperties
+j6
+java -cp target/classes:lib/* bytecode.Display3
+read -p "compilé avec un JDK 7, du bytecode version 6 peut contenir des appels à des APIs introduites en Java 7..."
+
 
 read -p "la compilation avec un JDK 6 aurait montré le problème..."
 j6

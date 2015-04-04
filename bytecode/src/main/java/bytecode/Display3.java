@@ -19,17 +19,21 @@ package bytecode;
  * under the License.
  */
 
-import org.apache.lucene.util.IOUtils;
+import java.io.IOException;
+import java.io.InputStream;
+import java.sql.Driver;
+import java.sql.SQLException;
+import java.sql.DriverManager;
 
 /**
- * Lance Display puis exécute du code d'une librairie compilée en JDK 7.
+ * Lance Display puis exécute du code dépendant d'une API du JDK 7.
  */
-public class Display2 extends Display
+public class Display3 extends Display
 {
     public static void main( String[] args )
         throws Exception
     {
-        new Display2().main();
+        new Display3().main();
     }
 
     public void main()
@@ -37,12 +41,21 @@ public class Display2 extends Display
     {
         super.main();
 
-        callJava7Library();
+        callJava7API();
     }
 
-    private static void callJava7Library()
+    private static void callJava7API()
         throws Exception
     {
-        IOUtils.reThrow( null );
+        Class.forName( "org.apache.derby.jdbc.EmbeddedDriver" );
+        Driver d = DriverManager.getDriver( "jdbc:derby:;shutdown=true" );
+        try
+        {
+            d.getParentLogger(); // méthode ajoutée en Java 7
+        }
+        catch ( SQLException sqle )
+        {
+            // ignore
+        }
     }
 }
