@@ -21,9 +21,6 @@ package bytecode;
 
 import java.io.IOException;
 import java.io.InputStream;
-import java.sql.Driver;
-import java.sql.SQLException;
-import java.sql.DriverManager;
 
 /**
  * Lance Display puis exécute du code dépendant d'une API du JDK 7.
@@ -47,15 +44,6 @@ public class Display3 extends Display
     private static void callJava7API()
         throws Exception
     {
-        Class.forName( "org.apache.derby.jdbc.EmbeddedDriver" );
-        Driver d = DriverManager.getDriver( "jdbc:derby:;shutdown=true" );
-        try
-        {
-            d.getParentLogger(); // méthode ajoutée en Java 7
-        }
-        catch ( SQLException sqle )
-        {
-            // ignore
-        }
+        System.lineSeparator();
     }
 }
