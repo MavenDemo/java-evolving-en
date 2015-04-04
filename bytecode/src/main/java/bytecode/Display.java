@@ -23,12 +23,12 @@ import java.io.IOException;
 import java.io.InputStream;
 
 /**
- * Affiche la version du bytecode de la classe compilée qui tourne.
+ * Affiche la version du bytecode de la classe compilée qui tourne et les infos de JVM qui tourne
  */
 public class Display
 {
 
-    private static void display( Class<?> clazz )
+    public void display( Class<?> clazz )
        throws IOException
     {
         System.out.print( clazz.getName() + " -> " );
@@ -45,10 +45,17 @@ public class Display
         in.close();
     }
 
-    public static void main( String[] args )
-       throws IOException
+    public void main()
+        throws Exception
     {
-        display( Display.class );
-        display( Object.class );
+        display( this.getClass() );
+        System.out.println( "Exécution sur " + Object.class.getPackage().getImplementationTitle() + " "
+            + Object.class.getPackage().getSpecificationVersion() );
+    }
+
+    public static void main( String[] args )
+       throws Exception
+    {
+        new Display().main();
     }
 }
