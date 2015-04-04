@@ -7,7 +7,7 @@ $ mvn -V clean package exec:exec javadoc:javadoc
 $ j8
 $ mvn -V clean package exec:exec javadoc:javadoc
 
-// profile toolchain => build JDK 6, Maven reste JRE 8
+// profil toolchain => compilation JDK 6, Maven reste JRE 8
 $ mvn -V clean package exec:exec javadoc:javadoc -Ptoolchain
 
 // test cas d'erreur
@@ -15,4 +15,4 @@ $ mvn -V clean package exec:exec javadoc:javadoc -Ptoolchain
 $ mvn -V clean package exec:exec javadoc:javadoc -Ptoolchain-jdk5
 
 
-// et en bonus, on peut exécuter jdeps 9 alors que Maven utilise JRE 8 et le compilateur JDK 6
+// et en bonus, on peut exécuter jdeps du JDK 9 alors que Maven utilise JRE 8 et le compilateur JDK 6
