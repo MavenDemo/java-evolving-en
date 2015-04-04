@@ -58,8 +58,8 @@ bytecode.Display -> cafe babe 0000 0031  : 0x31 = 49 = Java 5
 java.lang.Object -> cafe babe 0000 0033  : 0x33 = 51 = Java 7
 // le bytecode a été généré en version 5: fixé par le maven-compiler-plugin
 
-// définit les properties maven.compiler.source et target à 1.6
-$ mvn clean compile
+// profile "properties" définit les properties maven.compiler.source et target à 1.6
+$ mvn clean compile -Pproperties
 $ java -showversion -cp target/classes bytecode.Display
 java version "1.7.0_71"
 Java(TM) SE Runtime Environment (build 1.7.0_71-b14)
