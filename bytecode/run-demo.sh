@@ -54,7 +54,7 @@ read -p "Mais si enforcer détecte bien un problème dans les dépendances, il n
 j7
 mvn clean compile -Pproperties
 j6
-java -cp target/classes:lib/* bytecode.Display3
+java -cp target/classes bytecode.Display3
 read -p "compilé avec un JDK 7, du bytecode version 6 peut contenir des appels à des APIs introduites en Java 7..."
 
 

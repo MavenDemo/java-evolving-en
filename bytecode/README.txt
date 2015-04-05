@@ -128,13 +128,13 @@ Use 'mvn dependency:tree' to locate the source of the banned dependencies.
 $ j7
 $ mvn clean compile -Pproperties
 $ j6
-$ java -cp target/classes:lib/* bytecode.Display3
+$ java -cp target/classes bytecode.Display3
 bytecode.Display3 -> cafe babe 0000 0032  : 0x32 = 50 = Java 6
 Exécution sur Java Runtime Environment 1.6
-Exception in thread "main" java.lang.NoSuchMethodError: java.sql.Driver.getParentLogger()Ljava/util/logging/Logger;
-        at bytecode.Display3.callJava7API(Display3.java:54)
-        at bytecode.Display3.main(Display3.java:44)
-        at bytecode.Display3.main(Display3.java:36)
+Exception in thread "main" java.lang.NoSuchMethodError: java.lang.System.lineSeparator()Ljava/lang/String;
+        at bytecode.Display3.callJava7API(Display3.java:47)
+        at bytecode.Display3.main(Display3.java:41)
+        at bytecode.Display3.main(Display3.java:33)
 // compilé avec un JDK 7, du bytecode version 6 peut contenir des appels à des APIs introduites en Java 7...
 
 
@@ -144,8 +144,8 @@ $ mvn clean compile
 [INFO] -------------------------------------------------------------
 [ERROR] COMPILATION ERROR : 
 [INFO] -------------------------------------------------------------
-[ERROR] /home/herve/projets/maven/misc/demos/bytecode/src/main/java/bytecode/Display2.java:[54,14] cannot find symbol
-symbol  : method getParentLogger()
-location: interface java.sql.Driver
+[ERROR] /home/herve/projets/maven/misc/demos/bytecode/src/main/java/bytecode/Display3.java:[47,15] cannot find symbol
+symbol  : method lineSeparator()
+location: class java.lang.System
 [INFO] 1 error
 [INFO] -------------------------------------------------------------
