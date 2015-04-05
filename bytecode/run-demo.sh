@@ -1,5 +1,3 @@
-#!/bin/bash
-
 \rm -rf target src/main/java/bytecode/*.class
 
 set -v
