@@ -15,7 +15,7 @@ $ mvn -V clean package exec:exec javadoc:javadoc
 $ j7
 $ mvn -V clean package exec:exec javadoc:javadoc
 [INFO] --- exec-maven-plugin:1.4.0:exec (default-cli) @ toolchains ---
-toolchains.Main running on JVM with implementation version = 1.7.0_71
+toolchains.Main running on JVM version 1.7.0_71
 
 
 // profil toolchain => compilation JDK 6, Maven reste JRE 7
@@ -42,7 +42,7 @@ $ mvn -V clean package exec:exec javadoc:javadoc -Ptoolchain
  T E S T S
 -------------------------------------------------------
 Running toolchains.MainTest
-toolchains.Main running on JVM with implementation version = 1.6.0_32
+toolchains.Main running on JVM version = 1.6.0_32
 Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.034 sec
 
 Results :
@@ -52,7 +52,7 @@ Tests run: 1, Failures: 0, Errors: 0, Skipped: 0
 [INFO] 
 [INFO] --- exec-maven-plugin:1.4.0:exec (default-cli) @ toolchains ---
 [INFO] Toolchain in exec-maven-plugin: JDK[/home/opt/jdk1.6]
-toolchains.Main running on JVM with implementation version = 1.6.0_32
+toolchains.Main running on JVM version = 1.6.0_32
 [INFO] 
 [INFO] --- maven-javadoc-plugin:2.10.1:javadoc (default-cli) @ toolchains ---
 [INFO] Toolchain in javadoc-plugin: JDK[/home/opt/jdk1.6]
@@ -75,7 +75,7 @@ jdk [ version='5' ]
 $ j8
 $ mvn -V clean package exec:exec javadoc:javadoc
 $ java -cp target/classes toolchains.Main
-toolchains.Main running on JVM with implementation version = 1.7.0_71
+toolchains.Main running on JVM version 1.7.0_71
 Exception in thread "main" java.lang.NoSuchMethodError: java.util.concurrent.ConcurrentHashMap.keySet()Ljava/util/concurrent/ConcurrentHashMap$KeySetView;
         at toolchains.Main.callMap(Main.java:20)
         at toolchains.Main.main(Main.java:12)

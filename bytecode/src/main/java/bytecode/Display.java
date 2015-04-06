@@ -31,7 +31,7 @@ public class Display
     public void display( Class<?> clazz )
        throws IOException
     {
-        System.out.print( clazz.getName() + " -> " );
+        System.out.print( "\u001B[96m" + clazz.getName() + " -> " );
 
         InputStream in = clazz.getResourceAsStream( "/" + clazz.getName().replace( '.', '/' ) + ".class" );
         int version = 0;
@@ -49,7 +49,7 @@ public class Display
     {
         display( this.getClass() );
         Package p = Object.class.getPackage();
-        System.out.println( "Exécution sur " + p.getImplementationTitle() + " " + p.getSpecificationVersion() );
+        System.out.println( "Exécution sur " + p.getImplementationTitle() + " " + p.getSpecificationVersion() + "\u001B[0m" );
     }
 
     public static void main( String[] args )

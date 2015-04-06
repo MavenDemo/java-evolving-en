@@ -6,8 +6,8 @@ public class Main
 {
     public static void main( String[] args )
     {
-        System.out.println( "toolchains.Main running on JVM with implementation version = "
-            + String.class.getPackage().getImplementationVersion() );
+        System.out.println( "\u001B[96mtoolchains.Main running on JVM version \u001B[1m"
+            + String.class.getPackage().getSpecificationVersion() + "\u001B[0m" );
 
         callMap();
     }
