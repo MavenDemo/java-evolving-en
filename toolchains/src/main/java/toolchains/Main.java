@@ -4,10 +4,15 @@ import java.util.concurrent.ConcurrentHashMap;
 
 public class Main
 {
+    public static String esc( String esc )
+    {
+        return "\u001B[" + esc + "m";
+    }
+
     public static void main( String[] args )
     {
-        System.out.println( "\u001B[96mtoolchains.Main running on JVM version \u001B[1m"
-            + String.class.getPackage().getSpecificationVersion() + "\u001B[0m" );
+        System.out.println( esc( "96" ) + "toolchains.Main running on " + esc( "1" ) + "JVM "
+            + String.class.getPackage().getSpecificationVersion() + esc( "0" ) );
 
         callMap();
     }
