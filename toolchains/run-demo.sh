@@ -1,4 +1,5 @@
 #!/usr/bin/env bash
+
 clear
 
 run() {
@@ -6,26 +7,29 @@ run() {
   $*
 }
 
-readline() {
+commentaire() {
   echo ""
   echo -e "\\033[32m// $*\\033[0m"
+}
+
+enter() {
+  echo ""
+  echo -e "\\033[31m[...]\\033[0m"
   read
 }
 
-readline "build avec JDK 9..."
-j9
-run mvn -V clean package exec:exec javadoc:javadoc
-readline "failure: JDK 9 refuse -target 1.5, trop ancien..."
-
-
-readline "build et exécution en JDK/JRE 7..."
+commentaire "build et exécution classiques en JDK/JRE 7..."
 j7
 run mvn -V clean package exec:exec javadoc:javadoc
 
+enter
 
-readline "profil toolchain => compilation JDK 6, Maven reste JRE 7..."
+clear
+commentaire "profil toolchain => Maven s'exécute en JRE 7 mais utilise un JDK pour les plugins toolchain-aware..."
 run mvn -V clean package exec:exec javadoc:javadoc -Ptoolchain
 
+enter
 
-readline "test cas d'erreur: version de JDK qui n'est pas configurée dans les toolchains..."
+clear
+commentaire "test cas d'erreur: version de JDK qui n'est pas configurée dans les toolchains..."
 run mvn -V clean package exec:exec javadoc:javadoc -Ptoolchain-jdk5
