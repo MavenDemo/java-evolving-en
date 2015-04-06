@@ -4,13 +4,13 @@
 clear
 
 run() {
-  echo -e "\e[1m\$ $*\e[0m"
+  echo -e "\\033[1m\$ $*\\033[0m"
   $*
 }
 
 readline() {
   echo ""
-  echo -e "\e[32m// $*\e[0m"
+  echo -e "\\033[32m// $*\\033[0m"
   read
 }
 
