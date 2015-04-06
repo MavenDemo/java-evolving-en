@@ -19,6 +19,6 @@ public class Main extends Display
         throws Exception
     {
         // String.join is added in J8
-        System.out.println( "\u001B[96m" + String.join( "_", args ) + "\u001B[0m" );
+        System.out.println( esc( "96" ) + String.join( "_", args ) + esc( "0" ) );
     }
 }

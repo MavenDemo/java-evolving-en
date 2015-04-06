@@ -25,6 +25,7 @@ run mvn clean compile
 commentaire "et puisque bytecode Java 7, exécution en JRE 7..."
 j7
 run java -cp target/classes animalsniffer.Main Maven is mega cool
+commentaire "plante lors de l'appel d'une API JDK 8..."
 
 enter
 

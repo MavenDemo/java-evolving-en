@@ -27,11 +27,15 @@ import java.io.InputStream;
  */
 public class Display
 {
+    public static String esc( String esc )
+    {
+        return "\u001B[" + esc + "m";
+    }
 
-    public void display( Class<?> clazz )
+    public int display( Class<?> clazz )
        throws IOException
     {
-        System.out.print( "\u001B[96m" + clazz.getName() + " -> " );
+        System.out.print( esc( "96" ) + clazz.getName() + ".class -> " );
 
         InputStream in = clazz.getResourceAsStream( "/" + clazz.getName().replace( '.', '/' ) + ".class" );
         int version = 0;
@@ -40,16 +44,20 @@ public class Display
             System.out.print( String.format( "%02x%02x ", in.read(), version = in.read() ) );
         }
         in.close();
+        System.out.println( "..." );
 
-        System.out.println( String.format( " : 0x%02x = %d = Java %d", version, version, version - 44 ) );
+        System.out.println( String.format( "             version majeure = 0x%02x = %d = Java %d", version, version, version - 44 ) );
+
+        return version - 44;
     }
 
     public void run()
         throws Exception
     {
-        display( this.getClass() );
+        int version = display( this.getClass() );
         Package p = Object.class.getPackage();
-        System.out.println( "Exécution sur " + p.getImplementationTitle() + " " + p.getSpecificationVersion() + "\u001B[0m" );
+        System.out.println( esc( "1" ) + "Bytecode Java " + version + " running on JVM " + p.getSpecificationVersion()
+            + esc( "0" ) );
     }
 
     public static void main( String... args )
