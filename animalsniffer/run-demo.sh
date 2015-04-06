@@ -1,4 +1,5 @@
 #!/usr/bin/env bash
+
 clear
 
 run() {
@@ -6,29 +7,40 @@ run() {
   $*
 }
 
-readline() {
+commentaire() {
   echo ""
   echo -e "\\033[32m// $*\\033[0m"
+}
+
+enter() {
+  echo ""
+  echo -e "\\033[31m[...]\\033[0m"
   read
 }
 
-readline "compilation avec un JDK 8 et Maven configuré pour générer du bytecode Java 7..."
+commentaire "compilation avec un JDK 8 et Maven configuré pour générer du bytecode Java 7..."
 j8
 run mvn clean compile
 
-readline "puisque bytecode Java 7, exécution en JRE 7..."
+commentaire "et puisque bytecode Java 7, exécution en JRE 7..."
 j7
-run java -showversion -cp target/classes animalsniffer.Main Maven is mega cool
+run java -cp target/classes animalsniffer.Main Maven is mega cool
 
-readline "exécution en JRE 8..."
+enter
+
+commentaire "ne fonctionne qu'en JRE 8..."
 j8
 run java -showversion -cp target/classes animalsniffer.Main Maven is mega cool
 
+enter
 
-
-readline "Animal Sniffer à la rescousse pour valider que nous utilisons les bonnes APIs..."
+clear
+commentaire "Animal Sniffer à la rescousse pour valider que nous utilisons les bonnes APIs..."
 run mvn clean install -Panimal
 
 
-readline "Animal sniffer via enforcer..."
+enter
+
+clear
+commentaire "Animal sniffer via enforcer..."
 run mvn clean install -Panimal-enforcer
