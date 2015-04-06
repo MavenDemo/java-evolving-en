@@ -23,7 +23,7 @@ import java.io.IOException;
 import java.io.InputStream;
 
 /**
- * Affiche la version du bytecode de la classe compilée qui tourne et les infos de JVM qui tourne
+ * Affiche la version du bytecode de la classe compilée et les infos de JVM qui s'exécutent
  */
 public class Display
 {
@@ -32,25 +32,24 @@ public class Display
        throws IOException
     {
         System.out.print( clazz.getName() + " -> " );
-        InputStream in = clazz.getResourceAsStream( "/" + clazz.getName().replace( '.', '/' ) + ".class" );
 
+        InputStream in = clazz.getResourceAsStream( "/" + clazz.getName().replace( '.', '/' ) + ".class" );
         int version = 0;
         for ( int i = 0; i < 4; i++ )
         {
             System.out.print( String.format( "%02x%02x ", in.read(), version = in.read() ) );
         }
+        in.close();
 
         System.out.println( String.format( " : 0x%02x = %d = Java %d", version, version, version - 44 ) );
-
-        in.close();
     }
 
     public void main()
         throws Exception
     {
         display( this.getClass() );
-        System.out.println( "Exécution sur " + Object.class.getPackage().getImplementationTitle() + " "
-            + Object.class.getPackage().getSpecificationVersion() );
+        Package p = Object.class.getPackage();
+        System.out.println( "Exécution sur " + p.getImplementationTitle() + " " + p.getSpecificationVersion() );
     }
 
     public static void main( String[] args )
