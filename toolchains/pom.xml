@@ -151,6 +151,9 @@
             <groupId>org.apache.maven.plugins</groupId>
             <artifactId>maven-jdeps-plugin</artifactId>
             <version>3.0-SNAPSHOT</version>
+            <configuration>
+              <profile>true</profile>
+            </configuration>
             <executions>
               <execution>
                 <goals>

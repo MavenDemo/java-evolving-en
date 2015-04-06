@@ -17,6 +17,6 @@ public class Main
 
     public static void callMap()
     {
-        MAP.keySet(); // Java 8 coerce
+        MAP.keySet(); // Java 8 coerce: optimisation aggressive faite par le compilateur...
     }
 }
