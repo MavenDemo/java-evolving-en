@@ -1,4 +1,5 @@
-\rm -rf target src/main/java/bytecode/*.class
+#!/usr/bin/env bash
+\rm -f target src/main/java/bytecode/*.class
 
 clear
 
