@@ -26,16 +26,16 @@ import org.apache.lucene.util.IOUtils;
  */
 public class Display2 extends Display
 {
-    public static void main( String[] args )
+    public static void main( String... args )
         throws Exception
     {
-        new Display2().main();
+        new Display2().run();
     }
 
-    public void main()
+    public void run()
        throws Exception
     {
-        super.main();
+        super.run();
 
         callJava7Library();
     }

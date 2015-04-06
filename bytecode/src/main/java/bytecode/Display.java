@@ -44,7 +44,7 @@ public class Display
         System.out.println( String.format( " : 0x%02x = %d = Java %d", version, version, version - 44 ) );
     }
 
-    public void main()
+    public void run()
         throws Exception
     {
         display( this.getClass() );
@@ -52,9 +52,9 @@ public class Display
         System.out.println( "Exécution sur " + p.getImplementationTitle() + " " + p.getSpecificationVersion() + "\u001B[0m" );
     }
 
-    public static void main( String[] args )
+    public static void main( String... args )
        throws Exception
     {
-        new Display().main();
+        new Display().run();
     }
 }
