@@ -40,4 +40,4 @@ enter
 
 clear
 commentaire "test cas d'erreur: version de JDK qui n'est pas configurée dans les toolchains..."
-run mvn -V clean package exec:exec javadoc:javadoc -Ptoolchain-jdk5
+run mvn -V clean package exec:exec javadoc:javadoc -f pom-toolchain-jdk5.xml
