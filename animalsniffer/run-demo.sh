@@ -17,7 +17,14 @@ enter() {
   read
 }
 
+show() {
+  echo -en "\\033[92m"
+  $*
+  echo -en "\\033[0m"
+}
+
 commentaire "compilation avec un JDK 8 et Maven configuré pour générer du bytecode Java 7..."
+show grep -B 2 -A 2 maven.compiler.source pom.xml
 j8
 run mvn clean compile
 
@@ -36,11 +43,13 @@ enter
 
 clear
 commentaire "Animal Sniffer à la rescousse pour valider que nous utilisons les bonnes APIs..."
-run mvn clean install -Panimal
+show grep -B 2 -A 18 animal-sniffer-maven-plugin pom-animal.xml
+run mvn clean install -f pom-animal.xml
 
 
 enter
 
 clear
 commentaire "Animal sniffer via enforcer..."
-run mvn clean install -Panimal-enforcer
+show grep -B 2 -A 29 maven-enforcer-plugin pom-enforcer-animal.xml
+run mvn clean install -f pom-enforcer-animal.xml

@@ -19,6 +19,12 @@ enter() {
   read
 }
 
+show() {
+  echo -en "\\033[92m"
+  $*
+  echo -en "\\033[0m"
+}
+
 commentaire "compilation javac en JDK 7..."
 j7
 run javac -version src/main/java/bytecode/Display.java 
@@ -43,6 +49,7 @@ enter
 
 clear
 commentaire "compilation avec Maven et JDK 7..."
+show grep -B 7 -A 1 project.build.sourceEncoding pom.xml
 j7
 run mvn clean compile
 
@@ -55,7 +62,8 @@ enter
 
 clear
 commentaire "compilation avec Maven et JDK 7 mais properties maven.compiler.source et target à 1.6..."
-run mvn clean compile -Pproperties
+show grep -B 2 -A 2 maven.compiler.source pom-properties.xml
+run mvn clean compile -f pom-properties.xml
 run java -cp target/classes bytecode.Display
 
 commentaire "donc tout se passe bien en exécution en JRE 6..."
@@ -72,5 +80,6 @@ enter
 
 clear
 commentaire "la règle enforceBytecodeVersion du maven-enforcer-plugin permet de vérifier la version de bytecode des dépendances..."
-run mvn clean compile -Pproperties,enforcer
+show grep -B 2 -A 25 maven-enforcer-plugin pom-enforcer.xml
+run mvn clean compile -f pom-enforcer.xml
 commentaire "détecte le problème à la compilation..."

@@ -17,6 +17,12 @@ enter() {
   read
 }
 
+show() {
+  echo -en "\\033[92m"
+  $*
+  echo -en "\\033[0m"
+}
+
 commentaire "cas étonnant : la compilation avec un JDK 8, du fait d'optimisation aggressives, crée une dépendance à l'API JDK 8..."
 j8
 run mvn -V clean package exec:exec javadoc:javadoc
@@ -29,10 +35,12 @@ j7
 run java -cp target/classes toolchains.Main
 
 commentaire "le problème est bien détecté par Animal Sniffer, mais cela ne le résoud pas."
-commentaire "il ne faut pas utiliser un JDK 8 pour lancer Maven, ou bien utiliser Toolchains..."
+commentaire "il faut donc faire attention à ne jamais compiler ce code source avec un JDK 8..."
+commentaire "les toolchains permettent d'être sûrs de l'éviter..."
 
 enter
 
 clear
-commentaire "bonus : alors que Maven utilise JDK 7, on peut exécuter jdeps du JDK 8/9 (nécessite Maven 3.3)..."
-run mvn -V clean package exec:exec javadoc:javadoc -Pjdeps
+commentaire "bonus : alors que Maven utilise un JDK 7, on peut exécuter jdeps du JDK 8/9 (nécessite Maven 3.3)..."
+show grep -B 2 -A 13 maven-jdeps-plugin pom-toolchain-jdeps.xml
+run mvn -V clean package exec:exec javadoc:javadoc -f pom-toolchain-jdeps.xml
