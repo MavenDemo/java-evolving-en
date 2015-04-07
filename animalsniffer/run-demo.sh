@@ -13,8 +13,7 @@ commentaire() {
 }
 
 enter() {
-  echo ""
-  echo -e "\\033[31m[...]\\033[0m"
+  echo -en "\\033[31m[...]\\033[0m"
   read
 }
 
