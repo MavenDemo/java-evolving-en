@@ -21,6 +21,7 @@ show() {
   #echo -en "\\033[92m"
   $* | pygmentize -l xml
   #echo -en "\\033[0m"
+  enter
 }
 
 commentaire "cas étonnant : la compilation avec un JDK 8, du fait d'optimisation aggressives, crée une dépendance à l'API JDK 8..."

@@ -21,6 +21,7 @@ show() {
   #echo -en "\\033[92m"
   $* | pygmentize -l xml
   #echo -en "\\033[0m"
+  enter
 }
 
 commentaire "compilation avec un JDK 8 et Maven configuré pour générer du bytecode Java 7..."

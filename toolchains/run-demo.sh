@@ -21,6 +21,7 @@ show() {
   #echo -en "\\033[92m"
   $* | pygmentize -l xml
   #echo -en "\\033[0m"
+  enter
 }
 
 commentaire "build et exécution classiques en JDK/JRE 7..."

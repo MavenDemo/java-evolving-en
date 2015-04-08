@@ -23,6 +23,7 @@ show() {
   #echo -en "\\033[92m"
   $* | pygmentize -l xml
   #echo -en "\\033[0m"
+  enter
 }
 
 commentaire "compilation javac en JDK 7..."
