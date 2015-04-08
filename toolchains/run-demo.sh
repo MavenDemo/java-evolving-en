@@ -34,7 +34,7 @@ clear
 commentaire "maven-toolchain-plugin => Maven s'exécute en JRE 7 mais demande un JDK 6 pour les plugins toolchain-aware..."
 show grep -B 2 -A 16 maven-toolchains-plugin pom-toolchain.xml
 commentaire "avec des JDKs définis dans le toolchains.xml..."
-show cat toolchains.xml
+show cat ~/.m2/toolchains.xml
 run mvn -V clean package exec:exec javadoc:javadoc -f pom-toolchain.xml
 
 enter
