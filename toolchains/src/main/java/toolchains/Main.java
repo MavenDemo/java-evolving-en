@@ -16,7 +16,7 @@ public class Main
     {
         int version = display( Main.class );
         Package p = Object.class.getPackage();
-        System.out.println( esc( "1" ) + "Bytecode Java " + version + " running on JVM " + p.getSpecificationVersion()
+        System.out.println( esc( "1" ) + "Bytecode Java " + version + " exécuté sur une JVM " + p.getSpecificationVersion()
             + esc( "0" ) );
 
         callMap();

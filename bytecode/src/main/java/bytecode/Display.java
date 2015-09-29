@@ -56,7 +56,7 @@ public class Display
     {
         int version = display( this.getClass() );
         Package p = Object.class.getPackage();
-        System.out.println( esc( "1" ) + "Bytecode Java " + version + " running on JVM " + p.getSpecificationVersion()
+        System.out.println( esc( "1" ) + "Bytecode Java " + version + " exécuté sur une JVM " + p.getSpecificationVersion()
             + esc( "0" ) );
     }
 
