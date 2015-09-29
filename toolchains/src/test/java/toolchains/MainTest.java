@@ -7,6 +7,7 @@ public class MainTest
 
     @Test
     public void test()
+        throws Exception
     {
         Main.main( null );
     }
