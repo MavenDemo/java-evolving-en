@@ -41,7 +41,27 @@ commentaire "les toolchains permettent d'être sûrs de l'éviter..."
 
 enter
 
+commentaire "le JDK 9 apporte une réponse avec un nouveau flag à javac: -release (juillet 2015, JEP 247 : Compile for Older Platform Versions)."
+commentaire "Sans ce flag, même problème qu'avec le JDK 8"
+mkdir target/j9
+j9
+run javac -version -target 1.6 -source 1.6 src/main/java/*/*.java -d target/j9
+j7
+run java -cp target/j9 toolchains.Main
+
+enter
+
+commentaire "mais avec ce flag '-release 6', plus de problème"
+mkdir target/j9-release6
+j9
+run javac -version -release 6 src/main/java/*/*.java -d target/j9-release6
+j7
+run java -cp target/j9-release6 toolchains.Main
+
+enter
+
 clear
-commentaire "bonus : alors que Maven utilise un JDK 7, on peut exécuter jdeps du JDK 8/9 (nécessite Maven 3.3)..."
+commentaire "bonus : alors que Maven utilise un JDK 7, on peut exécuter jdeps du JDK 8/9..."
+commentaire "ATTENTION : cela nécessite Maven 3.3"
 show grep -B 2 -A 13 maven-jdeps-plugin pom-toolchain-jdeps.xml
 run mvn -V clean package exec:exec javadoc:javadoc -f pom-toolchain-jdeps.xml
