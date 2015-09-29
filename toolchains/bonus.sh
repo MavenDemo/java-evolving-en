@@ -64,4 +64,4 @@ clear
 commentaire "bonus : alors que Maven utilise un JDK 7, on peut exécuter jdeps du JDK 8/9..."
 commentaire "ATTENTION : cela nécessite Maven 3.3"
 show grep -B 2 -A 13 maven-jdeps-plugin pom-toolchain-jdeps.xml
-run mvn -V clean package exec:exec javadoc:javadoc -f pom-toolchain-jdeps.xml
+run mvn -V clean package -f pom-toolchain-jdeps.xml
