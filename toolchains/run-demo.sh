@@ -24,21 +24,21 @@ show() {
   enter
 }
 
-commentaire "build et exécution classiques en JDK/JRE 7..."
+commentaire "build and run as usual with JDK/JRE 7..."
 j7
 run mvn -V clean package exec:exec javadoc:javadoc
 
 enter
 
 clear
-commentaire "maven-toolchain-plugin => Maven s'exécute en JRE 7 mais demande un JDK 6 pour les plugins toolchain-aware..."
+commentaire "maven-toolchain-plugin => Maven runs with JRE 7 but asks for JDK 6 for use by toolchain-aware plugins..."
 show grep -B 2 -A 16 maven-toolchains-plugin pom-toolchain.xml
-commentaire "avec des JDKs définis dans le toolchains.xml..."
+commentaire "requires JDKs to be defined in toolchains.xml..."
 show cat ~/.m2/toolchains.xml
 run mvn -V clean package exec:exec javadoc:javadoc -f pom-toolchain.xml
 
 enter
 
 clear
-commentaire "test cas d'erreur: version de JDK qui n'est pas configurée dans les toolchains..."
+commentaire "failure test: JDK version not configured in toolchain.xml..."
 run mvn -V clean package exec:exec javadoc:javadoc -f pom-toolchain-jdk5.xml

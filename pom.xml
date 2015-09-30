@@ -2,12 +2,18 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
   <modelVersion>4.0.0</modelVersion>
 
-  <groupId>fr.devoxx</groupId>
-  <artifactId>reactor</artifactId>
+  <groupId>eu.apachecon</groupId>
+  <artifactId>java-evolving-en</artifactId>
   <version>0.0.1-SNAPSHOT</version>
   <packaging>pom</packaging>
 
-  <name>Devoxx FR 2015 Demos</name>
+  <name>ApacheCon: CORE Europe 2015 Demos</name>
+  <description>
+    Apache Maven @ ApacheCon: CORE Europe 2015 - Demos
+
+    For each demo, a README.txt file explains what to see and a run-demo.sh script is available
+    to run the demo ( . run-demo.sh )
+  </description>
 
   <modules>
     <module>bytecode</module>

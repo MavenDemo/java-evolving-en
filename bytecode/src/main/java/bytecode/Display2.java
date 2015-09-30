@@ -22,7 +22,7 @@ package bytecode;
 import org.apache.lucene.util.IOUtils;
 
 /**
- * Lance Display puis exécute du code d'une librairie compilée en JDK 7.
+ * Launch Display then runs code from a library compiled with JDK 7.
  */
 public class Display2 extends Display
 {

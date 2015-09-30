@@ -14,11 +14,11 @@ public class Main extends Display
         callMap();
     }
 
-    // classe ajoutée au JDK 5
+    // class added to JDK 5
     private static final ConcurrentHashMap<?, ?> MAP = new ConcurrentHashMap<Object, Object>();
 
     public static void callMap()
     {
-        MAP.keySet(); // Java 8 coerce: optimisation aggressive faite par le compilateur...
+        MAP.keySet(); // Java 8 coerce: aggressive optimization done by compiler...
     }
 }

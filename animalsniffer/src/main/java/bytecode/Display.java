@@ -23,11 +23,11 @@ import java.io.IOException;
 import java.io.InputStream;
 
 /**
- * Affiche la version du bytecode de la classe compilée et les infos de JVM qui s'exécutent
+ * Displays bytecode version of the compiled class and information on the JVM running it
  */
 public class Display
 {
-    public static String esc( String esc )
+    protected static String esc( String esc )
     {
         return "\u001B[" + esc + "m";
     }
@@ -46,7 +46,7 @@ public class Display
         in.close();
         System.out.println( "..." );
 
-        System.out.println( String.format( "             version majeure = 0x%02x = %d = Java %d", version, version, version - 44 ) );
+        System.out.println( String.format( "             major version = 0x%02x = %d = Java %d", version, version, version - 44 ) );
 
         return version - 44;
     }
@@ -56,7 +56,7 @@ public class Display
     {
         int version = display( this.getClass() );
         Package p = Object.class.getPackage();
-        System.out.println( esc( "1" ) + "Bytecode Java " + version + " exécuté sur une JVM " + p.getSpecificationVersion()
+        System.out.println( esc( "1" ) + "Java " + version + " bytecode running on JVM " + p.getSpecificationVersion()
             + esc( "0" ) );
     }
 

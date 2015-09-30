@@ -24,26 +24,26 @@ show() {
   enter
 }
 
-commentaire "compilation avec un JDK 8 et Maven configuré pour générer du bytecode Java 7..."
+commentaire "compilation with JDK 8 and Maven configured to generate Java 7 bytecode..."
 show grep -B 2 -A 2 maven.compiler.source pom.xml
 j8
 run mvn clean compile
 
-commentaire "et puisque bytecode Java 7, exécution en JRE 7..."
+commentaire "then since Java 7 bytecode, running with JRE 7..."
 j7
 run java -cp target/classes animalsniffer.Main Maven is mega cool
-commentaire "plante lors de l'appel d'une API JDK 8..."
+commentaire "breaks when calling a JRE 8 API..."
 
 enter
 
-commentaire "ne fonctionne qu'en JRE 8..."
+commentaire "this code works only with JRE 8..."
 j8
 run java -showversion -cp target/classes animalsniffer.Main Maven is mega cool
 
 enter
 
 clear
-commentaire "Animal Sniffer à la rescousse pour valider que nous utilisons les bonnes APIs..."
+commentaire "Animal Sniffer comes in to check that we use only supported APIs..."
 show grep -B 2 -A 18 animal-sniffer-maven-plugin pom-animal.xml
 run mvn clean install -f pom-animal.xml
 
@@ -51,6 +51,6 @@ run mvn clean install -f pom-animal.xml
 enter
 
 clear
-commentaire "Animal sniffer via enforcer..."
+commentaire "Animal Sniffer via enforcer..."
 show grep -B 2 -A 29 maven-enforcer-plugin pom-enforcer-animal.xml
 run mvn clean install -f pom-enforcer-animal.xml
